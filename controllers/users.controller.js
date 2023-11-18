@@ -4,7 +4,7 @@ var UserService = require('../services/user.service');
 // Saving the context of this module inside the _the variable
 _this = this;
 
-// Async Controller function to get the To do List
+// Async Controller function to get the To do Listsdsd
 exports.getUsers = async function (req, res, next) {
 
     // Check the existence of the query parameters, If doesn't exists assign a default value
