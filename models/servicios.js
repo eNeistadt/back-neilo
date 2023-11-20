@@ -1,19 +1,18 @@
-import { comentarios } from './comentarios.js';
-import { contratos } from './contratos.js';
-import { usuarios } from './usuarios.js';
-
 
 const mongoose = require('mongoose');
 
 const servicioSchema = new mongoose.Schema({
-  userid: {
+  _id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    required: true,
+  },
+  userid: {
+    type: String,
     required: true
   },
-  nombre: {
+  titulo: {
     type: String,
-    trim: true,
+    enum: ['.', '.', '.'],
     required: true
   },
   descripcion: {
@@ -21,14 +20,12 @@ const servicioSchema = new mongoose.Schema({
     trim: true,
     required: true
   },
-  categoria: {
-    type: String,
-    //poner las categorias (ver lo del middleware o enumerarlas directamente)
-    required: true
-  },
   frecuencia: {
     type: String,
-    enum: ['unica', 'semanal', 'mensual'],
+    required: true
+  },
+  duracion: {
+    type: String,
     required: true
   },
   tipo: {
@@ -36,25 +33,21 @@ const servicioSchema = new mongoose.Schema({
     required: true
   },
   costo: {
+    type: String,
+    required: true
+  },
+  rating: {
     type: Number,
     required: true
   },
-  duracion: {
-    type: Number,
-    required: true
-  },
-  cantValoraciones: {
-    type: Number,
-    required: true
-  },
-  totValoraciones: {
-    type: Number,
-    required: true
-  },
-  promValoraciones: {
-    type: Number,
-    required: true
+});
+
+servicioSchema.virtual('rating').get(function () {
+  if (this.calificaciones.length === 0) {
+    return 0; 
   }
+  const total = this.calificaciones.reduce((acc, calificacion) => acc + calificacion, 0);
+  return total / this.calificaciones.length;
 });
 
 const Servicio = mongoose.model('Servicio', servicioSchema);

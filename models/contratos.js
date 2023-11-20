@@ -1,7 +1,3 @@
-import { comentarios } from './comentarios.js';
-import { usuarios } from './usuarios.js';
-import { servicios } from './servicios.js';
-
 
 const mongoose = require('mongoose');
 
@@ -11,26 +7,30 @@ const contratoSchema = new mongoose.Schema({
     required: true,
   },
   userid: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    type: String,
+    required: true
   },
-  serviceid: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
-  mailContacto: {
+  alumno: {
     type: String,
     required: true,
   },
-  mensaje: {
+  servicio: {
     type: String,
     required: true,
   },
-  numTelefono: {
+  telefono: {
     type: String,
     required: true,
   },
-  estadoContrato: {
+  mail: {
+    type: String,
+    required: true,
+  },
+  horario: {
+    type: String,
+    required: true,
+  },
+  estado: {
     type: String,
     required: true,
   },

@@ -1,7 +1,3 @@
-import { comentarios } from './comentarios.js';
-import { contratos } from './contratos.js';
-import { servicios } from './usuarios.js';
-
 
 const mongoose = require('mongoose');
 
@@ -18,11 +14,11 @@ const UsuarioSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    contrasena: {
+    numTelefono: {
         type: String,
         required: true,
     },
-    numTelefono: {
+    contrasena: {
         type: String,
         required: true,
     },
@@ -34,7 +30,7 @@ const UsuarioSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    urlImagen: {
+    imagen: {
         type: String,
         required: true,
     },    
@@ -46,7 +42,7 @@ module.exports = Usuario;
 
 
 //original de sarasa
-/*
+
 var mongoose = require('mongoose')
 var mongoosePaginate = require('mongoose-paginate')
 
@@ -62,4 +58,3 @@ UserSchema.plugin(mongoosePaginate)
 const User = mongoose.model('User', UserSchema)
 
 module.exports = User;
-*/
