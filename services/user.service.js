@@ -1,24 +1,24 @@
-// Gettign the Newly created Mongoose Model we just created 
+
 var User = require('../models/usuario');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-// Saving the context of this module inside the _the variable
+
 _this = this
 
 exports.createUser = async function (user) {
-    // Creating a new Mongoose Object by using the new keyword
-    var hashedPassword = bcrypt.hashSync(user.password, 8);
+  
+    console.log("prueba2")
     
     var newUser = new User({
         name: user.name,
         email: user.email,
         date: new Date(),
-        password: hashedPassword
+        password: user.password
     })
 
     try {
-        // Saving the User 
+    
         var savedUser = await newUser.save();
         var token = jwt.sign({
             id: savedUser._id
@@ -27,7 +27,7 @@ exports.createUser = async function (user) {
         });
         return token;
     } catch (e) {
-        // return a Error message describing the reason 
+      
         console.log(e)    
         throw Error("Error while Creating User")
     }
