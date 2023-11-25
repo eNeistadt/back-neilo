@@ -10,6 +10,11 @@ router.get('/', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/comentario.routes');
   });
 router.post('/publicar', ComentarioController.publicarComentario)
+router.delete('/borrar',Authorization, ComentarioController.borrarComentario)
+router.put('/modificar', Authorization,ComentarioController.modificarComentario)
+router.get('/publicacion',Authorization, ComentarioController.getComentariosPublicacion)
+router.get('/dashboard', Authorization, ComentarioController.getComentariosDashboard)
+
 
 
 // Export the Router
