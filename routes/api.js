@@ -3,10 +3,10 @@ var express = require('express')
 
 var router = express.Router()
 var users = require('./api/user.route')
-var comentarios = require('./api/comentario.route')
-var contratos = require('./api/contrato.route')
-var mensajes = require('./api/mensaje.route')
-var servicios = require('./api/servicio.route')
+var comentarios = require('./api/comentarios.route')
+var contratos = require('./api/contratos.route')
+var mensajes = require('./api/mensajes.route')
+var servicios = require('./api/servicios.route')
 
 router.use('/users', users);
 router.use('/comentarios', comentarios);

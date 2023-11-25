@@ -7,7 +7,7 @@ var Authorization = require('../../auth/authorization');
 // Authorize each API with middleware and map to the Controller Functions
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.send('Llegaste a la ruta de  api/comentario.routes');
+    res.send('Llegaste a la ruta de  api/comentarios.routes');
   });
 router.post('/publicar', ComentarioController.publicarComentario)
 router.delete('/borrar',Authorization, ComentarioController.borrarComentario)

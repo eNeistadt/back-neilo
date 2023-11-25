@@ -1,4 +1,4 @@
-var ContratosService = require('../services/contratros.service');
+var ContratosService = require('../services/contratos.service');
 
 exports.publicarContratacion = async function (req, res, next) {
 }

@@ -42,13 +42,7 @@ const servicioSchema = new mongoose.Schema({
   },
 });
 
-servicioSchema.virtual('rating').get(function () {
-  if (this.calificaciones.length === 0) {
-    return 0; 
-  }
-  const total = this.calificaciones.reduce((acc, calificacion) => acc + calificacion, 0);
-  return total / this.calificaciones.length;
-});
+
 
 const Servicio = mongoose.model('Servicio', servicioSchema);
 
