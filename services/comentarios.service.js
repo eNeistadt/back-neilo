@@ -31,11 +31,41 @@ exports.publicarComentario = async function (comentario) {
     }
 }
 
-exports.borrarComentario = async function () {
-
+exports.borrarComentario = async function (id) {
+    try {
+        var deleted = await Comentario.remove({
+            _id: id
+        })
+        if (deleted.n === 0 && deleted.ok === 1) {
+            throw Error("Comentario Could not be deleted")
+        }
+        return deleted;
+    } catch (e) {
+        throw Error("Error Occured while Deleting the Comentario")
+    }
 }
 
-exports.modificarComentario = async function () {
+exports.modificarComentario = async function (comentario) {
+    var id = {_id : comentario.id}
+
+    try {
+        var oldComentario = await Comentario.findOne(id);
+    } catch (e) {
+        throw Error("Error occured while Finding the User")
+    }
+    
+    if (!oldComentario) {
+        return false;
+    }
+    
+    oldComentario.estado = comentario.estado
+
+    try {
+        var savedComentario = await oldComentario.save()
+        return savedComentario;
+    } catch (e) {
+        throw Error("And Error occured while updating the User");
+    }
 
 }
 
