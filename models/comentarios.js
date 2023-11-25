@@ -1,39 +1,18 @@
 
 const mongoose = require('mongoose');
 
-const comentarioSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-
-  serviceid: {
-    type: String,
-    required: true
-  },
-  nombreservicio: {
-    type: String,
-    required: true
-  },
-  alumno: {
-    type: String,
-    required: true
-  },
-  texto: {
-    type: String,
-    required: true
-  },
-  calificacion: {
-    type: Number,
-    required: true
-  },
-  estado: {
-    type: String,
-  },
-  fecha: {
-    type: Date,
-    default: Date.now
-  }
-});
+var ComentarioSchema = new mongoose.Schema({
+  serviceid: String,
+  nombreservicio: String,
+  alumno: String,
+  texto: String,
+  titulo: String,
+  calificacion: String,
+  estado: String,
+  fecha: Date,
+})
 
 // Crear el modelo de comentarios
-const Comentario = mongoose.model('Comentario', comentarioSchema);
+const Comentario = mongoose.model('Comentario', ComentarioSchema);
 
 module.exports = Comentario;
