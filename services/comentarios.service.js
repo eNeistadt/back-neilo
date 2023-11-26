@@ -13,7 +13,8 @@ exports.publicarComentario = async function (comentario) {
         titulo: comentario.titulo,
         calificacion: comentario.calificacion,
         estado: comentario.estado,
-        fecha: new Date()
+        fecha: new Date(),
+        userid: comentario.userid,
     })
 
     try {
@@ -69,10 +70,22 @@ exports.modificarComentario = async function (comentario) {
 
 }
 
-exports.getComentariosPublicacion = async function () {
+exports.getComentariosPublicacion = async function (id) {
+    
+    try {
+        var Comentarios = await Comentario.find({serviceid:id})
+        return Comentarios;
+    } catch (e) {
+        throw Error('Error while getting Comentarios');
+    }
 
 }
 
-exports.getComentariosDashboard = async function () {
-
+exports.getComentariosDashboard = async function (id) {
+    try {
+        var Comentarios = await Comentario.find({userid:id})
+        return Comentarios;
+    } catch (e) {
+        throw Error('Error while getting Comentarios');
+    }
 }

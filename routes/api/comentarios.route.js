@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 router.post('/publicar', ComentarioController.publicarComentario)
 router.delete('/borrar',Authorization, ComentarioController.borrarComentario)
 router.put('/modificar', Authorization,ComentarioController.modificarComentario)
-router.get('/publicacion',Authorization, ComentarioController.getComentariosPublicacion)
+router.get('/publicacion', ComentarioController.getComentariosPublicacion)
 router.get('/dashboard', Authorization, ComentarioController.getComentariosDashboard)
 
 

@@ -2,37 +2,42 @@
 const mongoose = require('mongoose');
 
 const contratoSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
+
   userid: {
     type: String,
+    trim: true,
     required: true
   },
   alumno: {
     type: String,
+    trim: true,
     required: true,
   },
   servicio: {
     type: String,
+    trim: true,
     required: true,
   },
   telefono: {
     type: String,
+    trim: true,
     required: true,
   },
-  mail: {
+  email: {
     type: String,
+    trim: true,
     required: true,
   },
   horario: {
     type: String,
+    trim: true,
     required: true,
   },
   estado: {
     type: String,
+    trim: true,
     required: true,
+    enum: ["Cancelada","Finalizada","Cancelada","Pendiente"]
   },
 });
 

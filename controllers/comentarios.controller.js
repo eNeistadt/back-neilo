@@ -10,13 +10,12 @@ exports.publicarComentario = async function (req, res, next) {
         titulo: req.body.titulo,
         calificacion: req.body.calificacion,
         estado: req.body.estado,
+        userid: req.body.userid,
     }
     try {
         var createdComentario = await ComentarioService.publicarComentario(Comentario)
         return res.status(201).json({createdComentario, message: "Succesfully Created Comment"})
     } catch (e) {
-        // Return an Error Response Message with Code and the Error Message.
-        console.log(e)
         return res.status(400).json({status: 400, message: "Comment Creation was Unsuccesfull"})
     }
 
@@ -53,8 +52,25 @@ exports.modificarComentario = async function (req, res, next) {
     }
 }
 
+
+
 exports.getComentariosPublicacion = async function (req, res, next) {
+    
+    var id = req.query.id
+    try {
+        var Comentarios = await ComentarioService.getComentariosPublicacion(id)
+        return res.status(200).json({status: 200, data: Comentarios, message: "Succesfully Comentarios Recieved"});
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message});
+    }
 }
 
 exports.getComentariosDashboard = async function (req, res, next) {
+    var id = req.query.id
+    try {
+        var Comentarios = await ComentarioService.getComentariosDashboard(id)
+        return res.status(200).json({status: 200, data: Comentarios, message: "Succesfully Comentarios Recieved"});
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message});
+    }
 }
