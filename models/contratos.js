@@ -37,7 +37,7 @@ const contratoSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: true,
-    enum: ["Cancelada","Finalizada","Cancelada","Pendiente"]
+    enum: ["Cancelada","Finalizada","Aceptada","Pendiente"]
   },
 });
 
