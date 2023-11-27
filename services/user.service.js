@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 
 _this = this
 
-exports.createUser = async function (user) {
+exports.createUser = async function (user,urlImg) {
   
     console.log("prueba2")
     var hashedPassword = bcrypt.hashSync(user.password, 8);
@@ -18,7 +18,7 @@ exports.createUser = async function (user) {
         telefono: user.telefono,
         titulo: user.titulo,
         experiencia: user.experiencia,
-        imagen: user.imagen
+        imagen: urlImg
     })
 
     try {

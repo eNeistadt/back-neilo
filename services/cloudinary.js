@@ -1,9 +1,9 @@
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET,
+    cloud_name: 'dtvqc9jik',
+    api_key: '173952323577482',
+    api_secret: 'xHYmP_elaJuUx7b8OOyKsME-5vw',
 });
 
 const uploadImage = async (imageBuffer) => {

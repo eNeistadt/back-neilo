@@ -1,5 +1,5 @@
 var UserService = require('../services/user.service');
-
+const CloudinaryService = require('../services/cloudinary');
 
 // Saving the context of this module inside the _the variable
 _this = this;
@@ -13,9 +13,7 @@ _this = this;
 
 exports.createUser = async function (req, res, next) {
     // Req.Body contains the form submit values.
-    console.log("asd")
-    console.log("llegue al controller",req.body)
-    console.log("prueba1")
+    const fileBuffer = req.file.buffer;
     var User = {
         name: req.body.name,
         email: req.body.email,
@@ -23,10 +21,10 @@ exports.createUser = async function (req, res, next) {
         telefono: req.body.telefono,
         titulo: req.body.titulo,
         experiencia: req.body.experiencia,
-        imagen: req.body.imagen
     }
     try {
-        var createdUser = await UserService.createUser(User)
+        const urlImg = await CloudinaryService.uploadImage(fileBuffer);
+        var createdUser = await UserService.createUser(User, urlImg);
         return res.status(201).json({createdUser, message: "Succesfully Created User"})
     } catch (e) {
         // Return an Error Response Message with Code and the Error Message.
