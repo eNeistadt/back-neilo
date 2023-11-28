@@ -37,7 +37,18 @@ exports.publicarServicio = async function (servicio,urlImg) {
 
 }
 
-exports.borrarServicio = async function () {
+exports.borrarServicio = async function (id) {
+    try {
+        var deleted = await Servicio.remove({
+            _id: id
+        })
+        if (deleted.n === 0 && deleted.ok === 1) {
+            throw Error("Contrato Could not be deleted")
+        }
+        return deleted;
+    } catch (e) {
+        throw Error("Error Occured while Deleting the Contrato")
+    }
 
 }
 
@@ -71,9 +82,19 @@ exports.modificarServicio = async function (servicio,urlImg) {
 }
 
 exports.getServiciosGenerales = async function () {
-
+    try {
+        var Servicios = await Servicio.find();
+        return Servicios;
+    } catch (e) {
+        throw Error('Error while getting Servicios');
+    }
 }
 
-exports.getServiciosDashboard = async function () {
-
+exports.getServiciosDashboard = async function (id) {
+    try {
+        var Servicios = await Servicio.find({userid:id})
+        return Servicios;
+    } catch (e) {
+        throw Error('Error while getting Servicios');
+    }
 }

@@ -29,6 +29,13 @@ exports.publicarServicio = async function (req, res, next) {
 }
 
 exports.borrarServicio = async function (req, res, next) {
+    var id = req.body.id;
+    try {
+        var deleted = await ServicioService.borrarServicio(id);
+        res.status(200).send("Succesfully Deleted... ");
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message})
+    }
 }
 
 exports.modificarServicio = async function (req, res, next) {
@@ -69,7 +76,20 @@ exports.modificarServicio = async function (req, res, next) {
 }
 
 exports.getServiciosGenerales = async function (req, res, next) {
+    try {
+        var Servicios = await ServicioService.getServiciosGenerales();
+        return res.status(200).json({status: 200, data: Servicios, message: "Succesfully Comentarios Recieved"});
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message});
+    }
 }
 
 exports.getServiciosDashboard = async function (req, res, next) {
+    var id = req.query.id
+    try {
+        var Servicios = await ServicioService.getServiciosDashboard(id)
+        return res.status(200).json({status: 200, data: Servicios, message: "Succesfully Servicios Recieved"});
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message});
+    }
 }
