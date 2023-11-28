@@ -12,6 +12,7 @@ exports.publicarServicio = async function (servicio,urlImg) {
         descripcion: servicio.descripcion,
         frecuencia: servicio.frecuencia,
         duracion: servicio.duracion,
+        tipo: servicio.tipo,
         costo: servicio.costo,
         rating : servicio.rating,
         estado : servicio.estado,
@@ -40,8 +41,33 @@ exports.borrarServicio = async function () {
 
 }
 
-exports.modificarServicio = async function () {
-
+exports.modificarServicio = async function (servicio,urlImg) {
+    var id = {_id: servicio.id}
+    try {
+        var oldServicio = await Servicio.findOne(id);
+    } catch (e) {
+        throw Error("Error occured while Finding the User")
+    }
+    if (!oldServicio) {
+        return false;
+    }
+    oldServicio.titulo = servicio.titulo
+    oldServicio.descripcion = servicio.descripcion
+    oldServicio.frecuencia = servicio.frecuencia
+    oldServicio.duracion = servicio.duracion
+    oldServicio.tipo = servicio.tipo
+    oldServicio.costo = servicio.costo
+    oldServicio.estado = servicio.estado
+    if (urlImg != 0){
+        oldServicio.imagen = urlImg;
+    }
+    
+    try {
+        var savedUser = await oldServicio.save()
+        return savedUser;
+    } catch (e) {
+        throw Error("And Error occured while updating the User");
+    }
 }
 
 exports.getServiciosGenerales = async function () {

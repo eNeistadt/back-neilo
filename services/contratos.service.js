@@ -47,7 +47,7 @@ exports.modificarContratacion = async function (contrato) {
         return false;
     }
     
-    oldContrato.estado = contrato.estado
+    oldContrato.estado = contrato.estado;
 
     try {
         var savedContrato = await oldContrato.save()

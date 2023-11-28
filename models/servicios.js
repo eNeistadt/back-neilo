@@ -46,7 +46,6 @@ const servicioSchema = new mongoose.Schema({
   estado:{
     type: Boolean,
     required: true,
-    enum:["Pausado","Publicado"]
   },
   imagen: {
     type: String,

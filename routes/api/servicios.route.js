@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/servicios.routes');
   });
 router.post('/publicar', upload.single('file'),Authorization ,ServicioController.publicarServicio)
-router.delete('/borrar', Authorization, ServicioController.modificarServicio)
-router.put('/modificar', Authorization,upload.single('file'), ServicioController.borrarServicio)
+router.delete('/borrar', Authorization, ServicioController.borrarServicio)
+router.put('/modificar',upload.single('file'), Authorization, ServicioController.modificarServicio)
 router.get('/getserviciosgen', ServicioController.getServiciosGenerales)
 router.get('/getserviciosdash', Authorization, ServicioController.getServiciosDashboard)
 

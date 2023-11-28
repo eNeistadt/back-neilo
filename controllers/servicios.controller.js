@@ -10,16 +10,16 @@ exports.publicarServicio = async function (req, res, next) {
             descripcion: req.body.descripcion,
             frecuencia: req.body.frecuencia,
             duracion: req.body.duracion,
+            tipo: req.body.tipo,
             costo: req.body.costo,
             rating: req.body.rating,
             estado: req.body.estado,
         }
         try {
-            console.log(1)
+            
             const urlImg = await CloudinaryService.uploadImage(fileBuffer);
-            console.log(2)
             var createdServicio = await ServicioService.publicarServicio(Servicio, urlImg);
-            console.log(3)
+           
             return res.status(201).json({createdServicio, message: "Succesfully Created Servicio"})
         } catch (e) {
             
@@ -32,6 +32,40 @@ exports.borrarServicio = async function (req, res, next) {
 }
 
 exports.modificarServicio = async function (req, res, next) {
+    console.log(1)
+    var urlImg;
+
+    if (req.file) {
+        try {
+            console.log(2)
+            const fileBuffer = req.file.buffer;
+            urlImg = await CloudinaryService.uploadImage(fileBuffer);
+        } catch (e){
+            console.log(3)
+            return res.status(400).json({status: 400., message: e.message})
+        }
+        
+    } else {
+        urlImg = 0;
+    }
+
+    var Servicio = {
+        id: req.body.id,
+        titulo: req.body.titulo,
+        descripcion: req.body.descripcion,
+        frecuencia: req.body.frecuencia,
+        duracion: req.body.duracion,
+        tipo: req.body.tipo,
+        costo: req.body.costo,
+        estado: req.body.estado,
+    }
+
+    try {
+        var updatedServicio = await ServicioService.modificarServicio(Servicio,urlImg)
+        return res.status(200).json({status: 200, data: updatedServicio, message: "Succesfully Updated Servicio"})
+    } catch (e) {
+        return res.status(400).json({status: 400., message: e.message})
+    }
 }
 
 exports.getServiciosGenerales = async function (req, res, next) {
