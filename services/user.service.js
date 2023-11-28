@@ -76,25 +76,17 @@ exports.loginUser = async function (user) {
 }
 
 
-exports.updateUser = async function (user) {
+exports.updateUser = async function (id,password) {
     
-    var id = {name :user.name}
-    console.log(id)
     try {
-        //Find the old User Object by the Id
-        var oldUser = await User.findOne(id);
-        console.log (oldUser)
+        var oldUser = await User.findOne({_id: id});
     } catch (e) {
         throw Error("Error occured while Finding the User")
     }
-    // If no old User Object exists return false
     if (!oldUser) {
         return false;
     }
-    //Edit the User Object
-    var hashedPassword = bcrypt.hashSync(user.password, 8);
-    oldUser.name = user.name
-    oldUser.email = user.email
+    var hashedPassword = bcrypt.hashSync(password, 8);
     oldUser.password = hashedPassword
     try {
         var savedUser = await oldUser.save()

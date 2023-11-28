@@ -162,7 +162,16 @@ exports.enviarMail = async function (req, res, next) {
 }
 
 exports.modificarPassword = async function (req, res, next) {
-    
+
+    var id = req.body.id;
+    var password = req.body.password;
+
+    try {
+        var updatedUser = await UserService.updateUser(id,password)
+        return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
+    } catch (e) {
+        return res.status(400).json({status: 400., message: e.message})
+    }
 }
 
 exports.getUserById = async function (req, res, next) {

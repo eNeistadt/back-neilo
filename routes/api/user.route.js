@@ -18,7 +18,7 @@ router.post('/userByMail', Authorization, UserController.getUsersByMail)
 router.put('/update', Authorization, UserController.updateUser)
 router.delete('/delete', Authorization, UserController.removeUser)
 router.post('/enviarmail', UserController.enviarMail)
-router.put('/modificarpassword', UserController.removeUser)
+router.put('/modificarpassword', UserController.modificarPassword)
 router.get('/getuser', UserController.getUserById)
 
 // Export the Router
