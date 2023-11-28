@@ -25,3 +25,7 @@ const sendMail = async (email, subject, text) => {
         console.log(error);
     }
 }
+
+module.exports = {
+    sendMail,
+};

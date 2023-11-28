@@ -158,3 +158,13 @@ exports.deleteUser = async function (id) {
         throw Error("Error Occured while Deleting the User")
     }
 }
+
+exports.getUser = async function (filtro) {
+    try {
+        var Usuario = await User.find(filtro)
+        return Usuario;
+    } catch (e) {
+        throw Error('Error while getting User');
+    }
+}
+

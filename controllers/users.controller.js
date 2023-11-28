@@ -140,8 +140,40 @@ exports.removeUser = async function (req, res, next) {
 
 exports.enviarMail = async function (req, res, next) {
 
+    var mail = req.body.mail;
+    filtro = {email: req.body.mail}
+    try {
+        var User = await UserService.getUser(filtro)
+
+        var id = User[0]._id;
+        console.log(id);
+        await MailService.sendMail(
+            mail,
+            'Recupero contraseña - Neilo',
+            `Por favor, haz clic en el siguiente enlace para recuperar tu contraseña:
+            http://neilo.com/recupero/${User[0]._id}`
+        );
+        res.status(200).json(User);
+    }
+    catch(err){
+        res.status(500).json({message: err.message});
+    }
+
 }
 
 exports.modificarPassword = async function (req, res, next) {
     
+}
+
+exports.getUserById = async function (req, res, next) {
+
+    let filtro= {_id: req.body.id}
+    try {
+        var User = await UserService.getUser(filtro)
+        // Return the Users list with the appropriate HTTP password Code and Message.
+        return res.status(200).json({status: 200, data: User, message: "Succesfully User Recieved"});
+    } catch (e) {
+        //Return an Error Response Message with Code and the Error Message.
+        return res.status(400).json({status: 400, message: e.message});
+    }
 }
