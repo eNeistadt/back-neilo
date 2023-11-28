@@ -17,8 +17,8 @@ router.get('/users',Authorization, UserController.getUsers)
 router.post('/userByMail', Authorization, UserController.getUsersByMail)
 router.put('/update', Authorization, UserController.updateUser)
 router.delete('/delete', Authorization, UserController.removeUser)
-
-
+router.post('/enviarmail', UserController.removeUser)
+router.put('/modificarpassword', UserController.removeUser)
 
 // Export the Router
 module.exports = router;

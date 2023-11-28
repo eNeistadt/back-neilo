@@ -81,9 +81,33 @@ exports.modificarServicio = async function (servicio,urlImg) {
     }
 }
 
-exports.getServiciosGenerales = async function () {
+exports.getServiciosGenerales = async function (servicio) {
+    console.log(servicio);
+    var Servicios;
     try {
-        var Servicios = await Servicio.find();
+        if (servicio!=0){
+                var conditions = [];
+                
+                if (servicio.frecuencia) {
+                    conditions.push({ frecuencia: servicio.frecuencia });
+                }
+                if (servicio.duracion) {
+                    conditions.push({ duracion: servicio.duracion });
+                }
+                if (servicio.tipo) {
+                    conditions.push({ tipo: servicio.tipo });
+                }
+               
+                console.log(conditions);
+                var Servicios = await Servicio.find({
+                    $and: conditions
+                });
+
+        } else{
+            Servicios = await Servicio.find();
+        }
+        
+          
         return Servicios;
     } catch (e) {
         throw Error('Error while getting Servicios');

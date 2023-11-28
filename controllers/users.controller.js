@@ -1,5 +1,6 @@
 var UserService = require('../services/user.service');
 const CloudinaryService = require('../services/cloudinary');
+const MailService = require('../services/nodemailer');
 
 // Saving the context of this module inside the _the variable
 _this = this;
@@ -136,3 +137,11 @@ exports.removeUser = async function (req, res, next) {
         return res.status(400).json({status: 400, message: e.message})
     }
 }  
+
+exports.enviarMail = async function (req, res, next) {
+
+}
+
+exports.modificarPassword = async function (req, res, next) {
+    
+}
