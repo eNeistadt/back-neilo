@@ -10,8 +10,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cors());
-app.use(cookieParser());
+
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Habilita el envío de cookies
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 
 
