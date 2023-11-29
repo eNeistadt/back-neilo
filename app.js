@@ -1,32 +1,19 @@
-//Express
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bluebird = require('bluebird');
-
-//incorporo cors
 var cors = require('cors');
 
-//importo router
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api'); //Custom
 
-//instancio el servidor
-var app = express();
+const app = express();
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false
-}));
+app.use(express.urlencoded({ extended: false }));
 
-
+app.use(cors());
 app.use(cookieParser());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
 
-// Resto de tu código...
+
 
 
 
