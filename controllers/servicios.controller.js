@@ -8,6 +8,7 @@ exports.publicarServicio = async function (req, res, next) {
             userid: req.body.userid,
             titulo: req.body.titulo,
             descripcion: req.body.descripcion,
+            categoria: req.body.categoria,
             frecuencia: req.body.frecuencia,
             duracion: req.body.duracion,
             tipo: req.body.tipo,
@@ -60,6 +61,7 @@ exports.modificarServicio = async function (req, res, next) {
         id: req.body.id,
         titulo: req.body.titulo,
         descripcion: req.body.descripcion,
+        categoria: req.query.categoria,
         frecuencia: req.body.frecuencia,
         duracion: req.body.duracion,
         tipo: req.body.tipo,
@@ -81,25 +83,17 @@ exports.getServiciosGenerales = async function (req, res, next) {
 
     if (Object.keys(req.query).length === 0 && req.query.constructor === Object) {
         Servicio = 0;
-        
     } else {
         Servicio = {
-            id: req.query.id,
-            titulo: req.query.titulo,
-            descripcion: req.query.descripcion,
+            categoria: req.query.categoria,
             frecuencia: req.query.frecuencia,
             duracion: req.query.duracion,
             tipo: req.query.tipo,
-            costo: req.query.costo,
-            estado: req.query.estado,
         }
-    }
-
-   
-
+    }  
     try {
         var Servicios = await ServicioService.getServiciosGenerales(Servicio);
-        return res.status(200).json({status: 200, data: Servicios, message: "Succesfully Comentarios Recieved"});
+        return res.status(200).json({status: 200, data: Servicios, message: "Succesfully Servicios Recieved"});
     } catch (e) {
         return res.status(400).json({status: 400, message: e.message});
     }

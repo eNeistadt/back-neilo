@@ -1,4 +1,5 @@
 var ComentarioService = require('../services/comentarios.service');
+var ServicioService = require('../services/servicios.service');
 
 exports.publicarComentario = async function (req, res, next) {
 
@@ -13,7 +14,14 @@ exports.publicarComentario = async function (req, res, next) {
         userid: req.body.userid,
     }
     try {
-        var createdComentario = await ComentarioService.publicarComentario(Comentario)
+        console.log(2)
+        var createdComentario = await ComentarioService.publicarComentario(Comentario);
+        console.log(3)
+
+        var rating = parseInt(req.body.calificacion); 
+        await ServicioService.actualizarRating(Comentario.serviceid, rating);
+
+        console.log(4)
         return res.status(201).json({createdComentario, message: "Succesfully Created Comment"})
     } catch (e) {
         return res.status(400).json({status: 400, message: "Comment Creation was Unsuccesfull"})

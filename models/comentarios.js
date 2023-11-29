@@ -22,15 +22,22 @@ var ComentarioSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  texto: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   titulo: {
     type: String,
     required: true,
     trim: true,
   },
   calificacion: {
-    type: String,
+    type: Number,
     required: true,
     trim: true,
+    min: 1,
+    max: 5, 
   },
   estado: {
     type: String,

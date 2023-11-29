@@ -18,20 +18,30 @@ const servicioSchema = new mongoose.Schema({
     trim: true,
     required: true
   },
+  categoria: {
+    type: String,
+    trim: true,
+    required: true,
+    enum:["Idiomas","Deportes","Música","Arte","Baile","Apoyo Escolar","Apoyo Universitario","Cocina","Otros"]
+    
+  },
   frecuencia: {
     type: String,
     trim: true,
-    required: true
+    required: true,
+    enum:["Única","Semanal","Mensual"]
   },
   duracion: {
     type: String,
     trim: true,
-    required: true
+    required: true,
+    enum:["30 Minutos","1 Hora","2 Horas","3 Horas","4 Horas"]
   },
   tipo: {
     type: String,
     trim: true,
-    required: true
+    required: true,
+    enum:["Individual","Grupal"]
   },
   costo: {
     type: String,
@@ -44,16 +54,25 @@ const servicioSchema = new mongoose.Schema({
     required: true
   },
   estado:{
-    type: Boolean,
+    type: String,
+    trim: true,
     required: true,
+    enum:["Pausado","Publicado"]
   },
   imagen: {
     type: String,
     required: true
-}
+  },
+  comentarios: {
+    type: Number,
+    trim: true,
+    required: true
+  },
+  total: {
+    type: Number,
+    required: true
+  },
 });
-
-
 
 const Servicio = mongoose.model('Servicio', servicioSchema);
 

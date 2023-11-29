@@ -10,13 +10,16 @@ exports.publicarServicio = async function (servicio,urlImg) {
         userid: servicio.userid,
         titulo: servicio.titulo,
         descripcion: servicio.descripcion,
+        categoria: servicio.categoria,
         frecuencia: servicio.frecuencia,
         duracion: servicio.duracion,
         tipo: servicio.tipo,
         costo: servicio.costo,
-        rating : servicio.rating,
+        rating : 0,
         estado : servicio.estado,
-        imagen: urlImg
+        comentarios: 0,
+        imagen: urlImg,
+        total: 0,
     })
 
     try {
@@ -62,13 +65,14 @@ exports.modificarServicio = async function (servicio,urlImg) {
     if (!oldServicio) {
         return false;
     }
-    oldServicio.titulo = servicio.titulo
-    oldServicio.descripcion = servicio.descripcion
-    oldServicio.frecuencia = servicio.frecuencia
-    oldServicio.duracion = servicio.duracion
-    oldServicio.tipo = servicio.tipo
-    oldServicio.costo = servicio.costo
-    oldServicio.estado = servicio.estado
+    oldServicio.titulo = servicio.titulo;
+    oldServicio.descripcion = servicio.descripcion;
+    oldServicio.categoria = servicio.categoria;
+    oldServicio.frecuencia = servicio.frecuencia;
+    oldServicio.duracion = servicio.duracion;
+    oldServicio.tipo = servicio.tipo;
+    oldServicio.costo = servicio.costo;
+    oldServicio.estado = servicio.estado;
     if (urlImg != 0){
         oldServicio.imagen = urlImg;
     }
@@ -87,7 +91,9 @@ exports.getServiciosGenerales = async function (servicio) {
     try {
         if (servicio!=0){
                 var conditions = [];
-                
+                if (servicio.categoria) {
+                    conditions.push({ categoria: servicio.categoria });
+                }
                 if (servicio.frecuencia) {
                     conditions.push({ frecuencia: servicio.frecuencia });
                 }
@@ -97,8 +103,6 @@ exports.getServiciosGenerales = async function (servicio) {
                 if (servicio.tipo) {
                     conditions.push({ tipo: servicio.tipo });
                 }
-               
-                console.log(conditions);
                 var Servicios = await Servicio.find({
                     $and: conditions
                 });
@@ -118,6 +122,21 @@ exports.getServiciosDashboard = async function (id) {
     try {
         var Servicios = await Servicio.find({userid:id})
         return Servicios;
+    } catch (e) {
+        throw Error('Error while getting Servicios');
+    }
+}
+
+exports.actualizarRating = async function (id,rating) {
+    console.log('hola');
+    try {
+        var oldServicio = await Servicio.findOne({_id:id});
+        console.log(oldServicio);
+        oldServicio.comentarios += 1;
+        oldServicio.total+=rating;
+        oldServicio.rating = (oldServicio.total/oldServicio.comentarios);
+        var savedServicio = await oldServicio.save();
+        return savedServicio;
     } catch (e) {
         throw Error('Error while getting Servicios');
     }
