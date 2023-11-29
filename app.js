@@ -17,9 +17,18 @@ app.use(express.urlencoded({
   extended: false
 }));
 
-//aplico cors
-app.use(cors());
+
 app.use(cookieParser());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
+
+// Resto de tu código...
+
+
 
 //Indico las rutas de los endpoint
 app.use('/api', apiRouter);
@@ -54,9 +63,10 @@ mongoose.connect(url,opts)
 
 
   const port = process.env.PORT || 3000;
-  app.listen(port, "0.0.0.0", function () {
+  app.listen(port, 'localhost', function () {
     console.log(`Express está escuchando en el puerto ${port}`);
   });
+  
 
 
 module.exports = app;
