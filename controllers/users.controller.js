@@ -150,8 +150,8 @@ exports.enviarMail = async function (req, res, next) {
         await MailService.sendMail(
             mail,
             'Recupero contraseña - Neilo',
-            `Por favor, haz clic en el siguiente enlace para recuperar tu contraseña:
-            http://neilo.com/recupero/${User[0]._id}`
+            `Por favor, hacé clic en el siguiente enlace para recuperar tu contraseña:
+            http://neilo.vercel.app/actualizar/${User[0]._id}`
         );
         res.status(200).json(User);
     }
