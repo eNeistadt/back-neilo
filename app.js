@@ -10,15 +10,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Permitir solicitudes desde cualquier origen
+app.use(cors());
 
-const corsOptions = {
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Habilita el envío de cookies
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsOptions));
+app.use(cookieParser());
 
 
 
@@ -57,7 +52,7 @@ mongoose.connect(url,opts)
 
 
   const port = process.env.PORT || 3000;
-  app.listen(port, 'localhost', function () {
+  app.listen(port, '0.0.0.0', function () {
     console.log(`Express está escuchando en el puerto ${port}`);
   });
   
