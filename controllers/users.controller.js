@@ -167,10 +167,8 @@ exports.modificarPassword = async function (req, res, next) {
 }
 
 exports.getUserById = async function (req, res, next) {
-
-    
     try {
-        let filtro= {_id: req.body.id}
+        let filtro= {_id: req.query.id}
         var User = await UserService.getUser(filtro)
         // Return the Users list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: User, message: "Succesfully User Recieved"});

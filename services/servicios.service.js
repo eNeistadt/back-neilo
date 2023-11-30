@@ -99,12 +99,13 @@ exports.getServiciosGenerales = async function (servicio) {
                 if (servicio.frecuencia) {
                     conditions.push({ frecuencia: servicio.frecuencia });
                 }
-                if (servicio.duracion) {
-                    conditions.push({ duracion: servicio.duracion });
-                }
                 if (servicio.tipo) {
                     conditions.push({ tipo: servicio.tipo });
                 }
+                if (servicio.rating) {
+                    const ratingValue = parseFloat(servicio.rating);
+                    conditions.push({ rating: { $gte: ratingValue, $lt: ratingValue + 1 - 0.01 } });
+                }                
                 var Servicios = await Servicio.find({
                     $and: conditions
                 });

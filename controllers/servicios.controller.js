@@ -85,7 +85,7 @@ exports.getServiciosGenerales = async function (req, res, next) {
         Servicio = {
             categoria: req.query.categoria,
             frecuencia: req.query.frecuencia,
-            duracion: req.query.duracion,
+            rating: req.query.rating,
             tipo: req.query.tipo,
         }
     }  
