@@ -58,7 +58,7 @@ exports.modificarServicio = async function (req, res, next) {
         id: req.body.id,
         titulo: req.body.titulo,
         descripcion: req.body.descripcion,
-        categoria: req.query.categoria,
+        categoria: req.body.categoria,
         frecuencia: req.body.frecuencia,
         duracion: req.body.duracion,
         tipo: req.body.tipo,
@@ -67,6 +67,7 @@ exports.modificarServicio = async function (req, res, next) {
     }
 
     try {
+
         var updatedServicio = await ServicioService.modificarServicio(Servicio,urlImg)
         return res.status(200).json({status: 200, data: updatedServicio, message: "Succesfully Updated Servicio"})
     } catch (e) {

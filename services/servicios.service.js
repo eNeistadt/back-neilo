@@ -56,6 +56,7 @@ exports.borrarServicio = async function (id) {
 }
 
 exports.modificarServicio = async function (servicio,urlImg) {
+
     var id = {_id: servicio.id}
     try {
         var oldServicio = await Servicio.findOne(id);
@@ -73,6 +74,7 @@ exports.modificarServicio = async function (servicio,urlImg) {
     oldServicio.tipo = servicio.tipo;
     oldServicio.costo = servicio.costo;
     oldServicio.estado = servicio.estado;
+
     if (urlImg != 0){
         oldServicio.imagen = urlImg;
     }
