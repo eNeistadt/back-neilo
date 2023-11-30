@@ -14,14 +14,14 @@ exports.publicarComentario = async function (req, res, next) {
         userid: req.body.userid,
     }
     try {
-        console.log(2)
+
         var createdComentario = await ComentarioService.publicarComentario(Comentario);
-        console.log(3)
+
 
         var rating = parseInt(req.body.calificacion); 
         await ServicioService.actualizarRating(Comentario.serviceid, rating);
 
-        console.log(4)
+
         return res.status(201).json({createdComentario, message: "Succesfully Created Comment"})
     } catch (e) {
         return res.status(400).json({status: 400, message: "Comment Creation was Unsuccesfull"})
@@ -30,8 +30,9 @@ exports.publicarComentario = async function (req, res, next) {
 }
 
 exports.borrarComentario = async function (req, res, next) {
-    var id = req.body.id;
+   
     try {
+        var id = req.body.id;
         var deleted = await ComentarioService.borrarComentario(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
@@ -64,8 +65,9 @@ exports.modificarComentario = async function (req, res, next) {
 
 exports.getComentariosPublicacion = async function (req, res, next) {
     
-    var id = req.query.id
+    
     try {
+        var id = req.query.id
         var Comentarios = await ComentarioService.getComentariosPublicacion(id)
         return res.status(200).json({status: 200, data: Comentarios, message: "Succesfully Comentarios Recieved"});
     } catch (e) {
@@ -74,8 +76,9 @@ exports.getComentariosPublicacion = async function (req, res, next) {
 }
 
 exports.getComentariosDashboard = async function (req, res, next) {
-    var id = req.query.id
+    
     try {
+        var id = req.query.id
         var Comentarios = await ComentarioService.getComentariosDashboard(id)
         return res.status(200).json({status: 200, data: Comentarios, message: "Succesfully Comentarios Recieved"});
     } catch (e) {

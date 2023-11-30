@@ -2,19 +2,12 @@ var UserService = require('../services/user.service');
 const CloudinaryService = require('../services/cloudinary');
 const MailService = require('../services/nodemailer');
 
-// Saving the context of this module inside the _the variable
+
 _this = this;
-
-// Async Controller function to get the To do List
-
-
-
 
 
 
 exports.createUser = async function (req, res, next) {
-    // Req.Body contains the form submit values.
-    const fileBuffer = req.file.buffer;
     var User = {
         name: req.body.name,
         email: req.body.email,
@@ -24,6 +17,7 @@ exports.createUser = async function (req, res, next) {
         experiencia: req.body.experiencia,
     }
     try {
+        const fileBuffer = req.file.buffer;
         const urlImg = await CloudinaryService.uploadImage(fileBuffer);
         var createdUser = await UserService.createUser(User, urlImg);
         return res.status(201).json({createdUser, message: "Succesfully Created User"})
@@ -37,7 +31,7 @@ exports.createUser = async function (req, res, next) {
 
 exports.loginUser = async function (req, res, next) {
     // Req.Body contains the form submit values.
-    console.log("body",req.body)
+
     var User = {
         email: req.body.email,
         password: req.body.password
@@ -90,12 +84,10 @@ exports.updateUser = async function (req, res, next) {
 
 exports.getUsersByMail = async function (req, res, next) {
 
-    // Check the existence of the query parameters, If doesn't exists assign a default value
-    var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
-    let filtro= {email: req.body.email}
-    console.log(filtro)
     try {
+        var page = req.query.page ? req.query.page : 1
+        var limit = req.query.limit ? req.query.limit : 10;
+        let filtro= {email: req.body.email}
         var Users = await UserService.getUsers(filtro, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
@@ -111,11 +103,10 @@ exports.getUsersByMail = async function (req, res, next) {
 
 
 exports.getUsers = async function (req, res, next) {
-
-    // Check the existence of the query parameters, If doesn't exists assign a default value
-    var page = req.query.page ? req.query.page : 1
-    var limit = req.query.limit ? req.query.limit : 10;
+    
     try {
+        var page = req.query.page ? req.query.page : 1
+        var limit = req.query.limit ? req.query.limit : 10;
         var Users = await UserService.getUsers({}, page, limit)
         // Return the Users list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
@@ -129,8 +120,9 @@ exports.getUsers = async function (req, res, next) {
     
 exports.removeUser = async function (req, res, next) {
 
-    var id = req.body.id;
+    
     try {
+        var id = req.body.id;
         var deleted = await UserService.deleteUser(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
@@ -140,9 +132,10 @@ exports.removeUser = async function (req, res, next) {
 
 exports.enviarMail = async function (req, res, next) {
 
-    var mail = req.body.mail;
-    filtro = {email: req.body.mail}
+    
     try {
+        var mail = req.body.mail;
+        filtro = {email: req.body.mail}
         var User = await UserService.getUser(filtro)
 
         var id = User[0]._id;
@@ -163,10 +156,9 @@ exports.enviarMail = async function (req, res, next) {
 
 exports.modificarPassword = async function (req, res, next) {
 
-    var id = req.body.id;
-    var password = req.body.password;
-
     try {
+        var id = req.body.id;
+        var password = req.body.password;
         var updatedUser = await UserService.updateUser(id,password)
         return res.status(200).json({status: 200, data: updatedUser, message: "Succesfully Updated User"})
     } catch (e) {
@@ -176,8 +168,9 @@ exports.modificarPassword = async function (req, res, next) {
 
 exports.getUserById = async function (req, res, next) {
 
-    let filtro= {_id: req.body.id}
+    
     try {
+        let filtro= {_id: req.body.id}
         var User = await UserService.getUser(filtro)
         // Return the Users list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: User, message: "Succesfully User Recieved"});

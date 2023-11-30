@@ -42,8 +42,9 @@ exports.modificarContratacion = async function (req, res, next) {
 }
 
 exports.borrarContratacion = async function (req, res, next) {
-    var id = req.body.id;
+    
     try {
+        var id = req.body.id;
         var deleted = await ContratoService.borrarContratacion(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
@@ -52,8 +53,9 @@ exports.borrarContratacion = async function (req, res, next) {
 }
 
 exports.getContrataciones = async function (req, res, next) {
-    var id = req.query.id
+    
     try {
+        var id = req.query.id
         var Contratos = await ContratoService.getContrataciones(id)
         return res.status(200).json({status: 200, data: Contratos, message: "Succesfully Contratos Recieved"});
     } catch (e) {

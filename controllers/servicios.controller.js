@@ -3,7 +3,6 @@ const CloudinaryService = require('../services/cloudinary');
 
 exports.publicarServicio = async function (req, res, next) {
         
-        const fileBuffer = req.file.buffer;
         var Servicio = {
             userid: req.body.userid,
             titulo: req.body.titulo,
@@ -17,7 +16,7 @@ exports.publicarServicio = async function (req, res, next) {
             estado: req.body.estado,
         }
         try {
-            
+            const fileBuffer = req.file.buffer;
             const urlImg = await CloudinaryService.uploadImage(fileBuffer);
             var createdServicio = await ServicioService.publicarServicio(Servicio, urlImg);
            
@@ -30,8 +29,9 @@ exports.publicarServicio = async function (req, res, next) {
 }
 
 exports.borrarServicio = async function (req, res, next) {
-    var id = req.body.id;
+    
     try {
+        var id = req.body.id;
         var deleted = await ServicioService.borrarServicio(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
@@ -40,16 +40,13 @@ exports.borrarServicio = async function (req, res, next) {
 }
 
 exports.modificarServicio = async function (req, res, next) {
-    console.log(1)
     var urlImg;
 
     if (req.file) {
         try {
-            console.log(2)
             const fileBuffer = req.file.buffer;
             urlImg = await CloudinaryService.uploadImage(fileBuffer);
         } catch (e){
-            console.log(3)
             return res.status(400).json({status: 400., message: e.message})
         }
         
@@ -100,8 +97,9 @@ exports.getServiciosGenerales = async function (req, res, next) {
 }
 
 exports.getServiciosDashboard = async function (req, res, next) {
-    var id = req.query.id
+    
     try {
+        var id = req.query.id
         var Servicios = await ServicioService.getServiciosDashboard(id)
         return res.status(200).json({status: 200, data: Servicios, message: "Succesfully Servicios Recieved"});
     } catch (e) {

@@ -17,8 +17,9 @@ exports.publicarMensaje = async function (req, res, next) {
 }
 
 exports.borrarMensaje = async function (req, res, next) {
-    var id = req.body.id;
+    
     try {
+        var id = req.body.id;
         var deleted = await MensajeService.borrarMensaje(id);
         res.status(200).send("Succesfully Deleted... ");
     } catch (e) {
@@ -27,8 +28,9 @@ exports.borrarMensaje = async function (req, res, next) {
 }
 
 exports.getMensajes = async function (req, res, next) {
-    var id = req.query.id
+    
     try {
+        var id = req.query.id
         var Mensajes = await MensajeService.getMensajes(id)
         return res.status(200).json({status: 200, data: Mensajes, message: "Succesfully Contratos Recieved"});
     } catch (e) {
