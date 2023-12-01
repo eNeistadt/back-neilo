@@ -43,7 +43,7 @@ var ComentarioSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    enum:["Aceptado","Rechazado"]
+    enum:["Aceptado","Rechazado","Pendiente"]
   },
   fecha: {
     type: String,
