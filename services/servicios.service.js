@@ -93,6 +93,9 @@ exports.getServiciosGenerales = async function (servicio) {
     try {
         if (servicio!=0){
                 var conditions = [];
+                if (servicio.id) {
+                    conditions.push({ _id: servicio.id });
+                }
                 if (servicio.categoria) {
                     conditions.push({ categoria: servicio.categoria });
                 }

@@ -83,6 +83,7 @@ exports.getServiciosGenerales = async function (req, res, next) {
         Servicio = 0;
     } else {
         Servicio = {
+            id: req.query.id,
             categoria: req.query.categoria,
             frecuencia: req.query.frecuencia,
             rating: req.query.rating,
