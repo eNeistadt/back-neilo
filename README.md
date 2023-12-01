@@ -1,4 +1,4 @@
-# PARA CORRER EL SERVIDOR LOCAL
+# PARA CORRER EN SERVIDOR LOCAL
 
 1. Instalar NodeJS (https://nodejs.org/en) y VS Code (https://code.visualstudio.com/download)
 2. Abir VS Code
@@ -9,7 +9,7 @@
 
 ---
 
-### Estructura de la base de datos.
+## Estructura de la base de datos.
 
 Lenguaje: MongoDB.
 
