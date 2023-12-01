@@ -91,32 +91,32 @@ Lenguaje: MongoDB.
 
 ### Requerimientos funcionales.
 
-#### USUARIOS.
+#### [USUARIOS](https://documenter.getpostman.com/view/31401937/2s9YeK39pV).
 * Registrarse.
 * Iniciar Sesión.
 * Enviar mail para recuperar contraseña.
 * Modificar contraseña.
 * Mostrar usuario por id.
 
-#### SERVICIOS.
+#### [SERVICIOS](https://documenter.getpostman.com/view/31401937/2s9YeK39pU).
 * Publicar.
 * Modificar.
 * Eliminar.
 * Mostrar todos los servicios.
 * Mostrar los servicios de un profesor.
 
-#### CONTRATOS.
+#### [CONTRATOS](https://documenter.getpostman.com/view/31401937/2s9YeK39pT).
 * Publicar.
 * Modificar.
 * Eliminar.
 * Mostrar los contratos de un profesor.
 
-#### MENSAJES.
+#### [MENSAJES](https://documenter.getpostman.com/view/31401937/2s9YeK39kC).
 * Publicar.
 * Eliminar.
 * Mostrar los mensajes de un profesor.
 
-#### COMENTARIOS.
+#### [COMENTARIOS](https://documenter.getpostman.com/view/31401937/2s9YeK39kB).
 * Publicar.
 * Modificar.
 * Eliminar.
