@@ -105,9 +105,7 @@ exports.getUsersByMail = async function (req, res, next) {
 exports.getUsers = async function (req, res, next) {
     
     try {
-        var page = req.query.page ? req.query.page : 1
-        var limit = req.query.limit ? req.query.limit : 10;
-        var Users = await UserService.getUsers({}, page, limit)
+        var Users = await UserService.getUsers()
         // Return the Users list with the appropriate HTTP password Code and Message.
         return res.status(200).json({status: 200, data: Users, message: "Succesfully Users Recieved"});
     } catch (e) {
