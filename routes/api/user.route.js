@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   });
 router.post('/registration',upload.single('file'), UserController.createUser)
 router.post('/login/',UserController.loginUser)
-router.get('/users',Authorization, UserController.getUsers)
+router.get('/users', UserController.getUsers)
 router.post('/userByMail', Authorization, UserController.getUsersByMail)
 router.put('/update', Authorization, UserController.updateUser)
 router.delete('/delete', Authorization, UserController.removeUser)
